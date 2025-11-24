@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 #define MAX_ITENS 10
 
-// Struct do item
 typedef struct {
     char nome[30];
     char tipo[20];
@@ -14,6 +12,10 @@ typedef struct {
 
 Item mochila[MAX_ITENS];
 int total = 0;
+
+void limparBuffer() {
+    while (getchar() != '\n');
+}
 
 // Inserir item
 void inserirItem() {
@@ -25,12 +27,15 @@ void inserirItem() {
     Item novo;
     printf("Nome: ");
     scanf("%s", novo.nome);
+    limparBuffer();
 
     printf("Tipo: ");
     scanf("%s", novo.tipo);
+    limparBuffer();
 
     printf("Quantidade: ");
     scanf("%d", &novo.quantidade);
+    limparBuffer();
 
     mochila[total] = novo;
     total++;
@@ -43,6 +48,7 @@ void removerItem() {
     char nome[30];
     printf("Nome do item para remover: ");
     scanf("%s", nome);
+    limparBuffer();
 
     for (int i = 0; i < total; i++) {
         if (strcmp(mochila[i].nome, nome) == 0) {
@@ -78,6 +84,7 @@ void buscarItem() {
     char nome[30];
     printf("Nome do item para buscar: ");
     scanf("%s", nome);
+    limparBuffer();
 
     for (int i = 0; i < total; i++) {
         if (strcmp(mochila[i].nome, nome) == 0) {
@@ -90,7 +97,6 @@ void buscarItem() {
     printf("Item nao encontrado.\n");
 }
 
-// Menu
 int main() {
     int opcao;
 
@@ -102,6 +108,7 @@ int main() {
         printf("0 - Sair\n");
         printf("Escolha: ");
         scanf("%d", &opcao);
+        limparBuffer();
 
         switch (opcao) {
             case 1: inserirItem(); break;
